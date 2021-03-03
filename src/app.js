@@ -19,7 +19,7 @@ const Register = require("./models/registers");
 
 const { json } = require("express");
 
-const server = app.listen(4000, () => {
+const server = app.listen(port, () => {
     console.log(`Listening to port ${port}`);
 })
 
