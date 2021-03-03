@@ -13,13 +13,29 @@ const auth = require('./middleware/auth');
 
 const port = process.env.PORT || 4000;
 
-// const INDEX = "../templates/views/index.html"
+// require("./db/conn");
 
-// const server = app.use((req, res) => res.sendFile(__dirname))
-//     .listen(port, () => console.log(`Listening on ${port}`));
+const mongoose = require('mongoose');
+
+const template_path = path.join(__dirname, "../templates/views");
+const partials_path = path.join(__dirname, "../templates/partials");
+const static_path = path.join(__dirname, "../public")
 
 
-require("./db/conn");
+const uri = process.env.MONGODB_URI;
+mongoose.connect(uri || "mongodb://localhost:27017/ST1", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log("Database Connection Successful!");
+}).catch((err) => {
+    console.log("Database Connection Failed");
+});
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(template_path))
+}
+
 const Register = require("./models/registers");
 
 const { json } = require("express");
@@ -28,9 +44,7 @@ const server = app.listen(port, () => {
     console.log(`Listening to port ${port}`);
 })
 
-const template_path = path.join(__dirname, "../templates/views");
-const partials_path = path.join(__dirname, "../templates/partials");
-const static_path = path.join(__dirname, "../public")
+
 
 app.use(express.json());
 app.use(cookieParser());
