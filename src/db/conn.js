@@ -7,5 +7,5 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/ST1", {
 }).then(() => {
     console.log("Database Connection Successful!");
 }).catch((err) => {
-    console.log(" Database Connection Failed");
-});
+    console.log("Database Connection Failed");
+}); 
