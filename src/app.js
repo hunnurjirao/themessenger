@@ -13,15 +13,20 @@ const auth = require('./middleware/auth');
 
 const port = process.env.PORT || 4000;
 
+const INDEX = "../templates/views/index.html"
+
+const server = app.use((req, res) => res.sendFile(__dirname))
+    .listen(port, () => console.log(`Listening on ${port}`));
+
 
 require("./db/conn");
 const Register = require("./models/registers");
 
 const { json } = require("express");
 
-const server = app.listen(port, () => {
-    console.log(`Listening to port ${port}`);
-})
+// const server = app.listen(port, () => {
+//     console.log(`Listening to port ${port}`);
+// })
 
 const template_path = path.join(__dirname, "../templates/views");
 const partials_path = path.join(__dirname, "../templates/partials");
