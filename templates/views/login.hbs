@@ -1,0 +1,48 @@
+{{>navbar}}
+
+<nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand mr-auto" href="/"><strong>THE MESSENGER</strong></a>
+
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item  mr-2"><a class="nav-link" href="/">Home</a></li>
+
+                <li class="nav-item active mr-2"><a class="nav-link" href="/login">Login</a></li>
+
+                <li class="nav-item  mr-2"><a class="nav-link" href="/register"> Register</a></li>
+
+                {{!-- <li class="nav-item  mr-2"><a class="nav-link" href="/messenger">The Messeneer</a></li> --}}
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+<div class="container">
+
+    <div class="col-12 col-md-5 offset-md-3 align-items-center main-div">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email Id</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="confirm_email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="confirm_password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <br>
+        <p>Didn't register! then <a href="/register">register</a> here</p>
+    </div>
+
+
+</div>
+
+{{>footer}}

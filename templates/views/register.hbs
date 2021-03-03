@@ -1,0 +1,77 @@
+{{>navbar}}
+
+<nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand mr-auto" href="/"><strong>THE MESSENGER</strong></a>
+
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item  mr-2"><a class="nav-link" href="/">Home</a></li>
+
+                <li class="nav-item  mr-2"><a class="nav-link" href="/login">Login</a></li>
+
+                <li class="nav-item active mr-2"><a class="nav-link" href="/register">Register</a></li>
+
+                {{!-- <li class="nav-item  mr-2"><a class="nav-link" href="/messenger">Messeneer</a></li> --}}
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+<div class="container ">
+
+    <div class="container row">
+        <div class="col-12 col-md-6 align-items-center main-div">
+            <form action="/register" method="POST">
+                <small id="emailHelp" class="form-text text-muted">Please enter the details manually. If any error
+                    occurs, just refresh and try again!</small> <br>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label for="FirstName">First Name</label>
+                        <input type="text" class="form-control" id="FirstName" name="firstname"
+                            placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="LastName">Last Name</label>
+                        <input type="text" class="form-control" id="LastName" name="lastname" placeholder="Last Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="phoneNo">Phone No.</label>
+                        <input type="tel" class="form-control" id="phoneNo" name="phone" placeholder="Phone No.">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="********">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cpassword">Confirm passowrd</label>
+                        <input type="password" class="form-control" id="cpassword" name="cpassword"
+                            placeholder="********">
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary" value="Register">Register</button>
+            </form>
+            <br>
+            <p>Already registered! then <a href="/login">Login</a> here.</p>
+        </div>
+        <div class="col-12 col-sm-4 offset-sm-2">
+            <img src="https://image.flaticon.com/icons/png/512/2312/2312512.png"
+                class="rounded float-right register-img" alt="Responsive image">
+        </div>
+    </div>
+
+</div>
+
+{{>footer}}

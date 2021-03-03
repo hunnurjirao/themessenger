@@ -1,0 +1,38 @@
+.main-div {
+  margin-top: 180px;
+  border: 1px solid honeydew;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: honeydew;
+}
+
+body {
+  background-color: rgba(240, 255, 240, 0.788);
+}
+
+.register-img {
+  margin-top: 180px;
+  width: 350px;
+  height: 350px;
+}
+
+.login-img {
+  margin-top: 180px;
+  width: 300px;
+  height: 300px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+footer {
+  position: fixed;
+
+  bottom: 0;
+  width: 100%;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
