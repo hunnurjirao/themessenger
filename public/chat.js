@@ -2,7 +2,7 @@
 
 // const socket = io.connect(`http://localhost:${port}`)
 
-var socket = io.connect();
+var socket = io();
 
 var username = document.getElementById("username");
 var btn = document.getElementById("send");
