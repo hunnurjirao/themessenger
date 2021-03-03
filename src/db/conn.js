@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const uri = process.env.MONGODB_URI;
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/ST1", {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -8,4 +9,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/ST1", {
     console.log("Database Connection Successful!");
 }).catch((err) => {
     console.log("Database Connection Failed");
-}); 
+});
+
+// || "mongodb://localhost:27017/ST1"   
