@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const socket = require("socket.io");
 const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
 const auth = require('./middleware/auth');
 
 const port = process.env.PORT || 4000;
@@ -17,24 +16,17 @@ const port = process.env.PORT || 4000;
 
 const mongoose = require('mongoose');
 
-const template_path = path.join(__dirname, "../templates/views");
-const partials_path = path.join(__dirname, "../templates/partials");
-const static_path = path.join(__dirname, "../public")
-
-
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri || "mongodb://localhost:27017/ST1", {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 }).then(() => {
     console.log("Database Connection Successful!");
 }).catch((err) => {
     console.log("Database Connection Failed");
 });
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(template_path))
-}
 
 const Register = require("./models/registers");
 
@@ -44,7 +36,9 @@ const server = app.listen(port, () => {
     console.log(`Listening to port ${port}`);
 })
 
-
+const template_path = path.join(__dirname, "../templates/views");
+const partials_path = path.join(__dirname, "../templates/partials");
+const static_path = path.join(__dirname, "../public")
 
 app.use(express.json());
 app.use(cookieParser());
@@ -143,7 +137,11 @@ app.post("/register", async (req, res) => {
                 httpOnly: true
             });
 
-            const registered = await registerUser.save()
+            const registered = await registerUser.save(function (err, result) {
+                if (err) {
+                    console.log(err);
+                }
+            })
 
             var minm = 10000;
             var maxm = 99999;
@@ -158,7 +156,8 @@ app.post("/register", async (req, res) => {
             transporter.sendMail(mailOptions)
 
             res.status(201).render("index", {
-                rand_num: rand_num
+                rand_num: rand_num,
+                link: "logout"
             });
         } else {
             res.send("password not Matching!")
@@ -188,7 +187,8 @@ app.post("/login", async (req, res) => {
 
         if (isMatch) {
             res.status(201).render("index", {
-                quote: "Start messaging!"
+                quote: "Start messaging!",
+                link: "logout"
             });
         } else {
             res.send("Invalid Login Details");
