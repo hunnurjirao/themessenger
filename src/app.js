@@ -136,7 +136,7 @@ app.post("/register", async (req, res) => {
                 expires: new Date(Date.now() + 1000 * 300),
                 httpOnly: true
             });
-
+            console.log("All good");
             const registered = await registerUser.save(function (err, result) {
                 if (err) {
                     console.log(err);
