@@ -140,8 +140,10 @@ app.post("/register", async (req, res) => {
             const registered = await registerUser.save(function (err, result) {
                 if (err) {
                     console.log(err);
+                    console.log("registerUser part failure")
                 }
             })
+            console.log("registerUser part successful")
 
             var minm = 10000;
             var maxm = 99999;
@@ -167,6 +169,7 @@ app.post("/register", async (req, res) => {
 
     } catch (error) {
         res.status(401).send(error);
+        res.send("Something went wrong in registration")
     }
 });
 
