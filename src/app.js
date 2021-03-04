@@ -111,7 +111,7 @@ app.get("/logout", auth, async (req, res) => {
     }
 });
 
-app.post("/register", async (req, res, next) => {
+app.post("/register", async (req, res) => {
 
 
     try {
@@ -130,30 +130,18 @@ app.post("/register", async (req, res, next) => {
             })
 
 
-            const token = await registerUser.generateAuthToken((err, res) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    console.log(res);
-                }
-            });
+            const token = await registerUser.generateAuthToken()
 
             res.cookie("jwt", token, {
                 expires: new Date(Date.now() + 1000 * 300),
                 httpOnly: true
             });
 
-            const registered = await registerUser.save(function (err, result) {
-                if (err) {
-                    console.log(err);
-                    console.log("registerUser part failure")
-                    next();
-
-                } else {
-                    console.log("registerUser part successful")
-                }
-
-            })
+            try {
+                const registered = await registerUser.save()
+            } catch (error) {
+                console.log(error);
+            }
 
 
             var minm = 10000;
