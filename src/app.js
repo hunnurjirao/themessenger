@@ -139,10 +139,12 @@ app.post("/register", async (req, res) => {
                 httpOnly: true
             });
 
+            try {
+                const registered = await registerUser.save()
+            } catch (error) {
+                console.log("registerUser part error");
+            }
 
-            const registered = await registerUser.save().catch((err) => {
-                console.log(`The error part is ${err}`)
-            })
 
 
 

@@ -55,10 +55,12 @@ userSchema.methods.generateAuthToken = async function () {
         const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
         this.tokens = this.tokens.concat({ token: token });
 
-        await this.save().catch((err) => {
-            console.log(`The error in registers part is ${err}`)
-        })
-        console.log("registers part successful")
+        try {
+            await this.save()
+        } catch (error) {
+            console.log("registers part error")
+        }
+
 
         return token;
 
