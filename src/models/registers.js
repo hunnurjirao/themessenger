@@ -71,10 +71,12 @@ userSchema.pre("save", async function (next) {
 
             this.cpassword = await bcrypt.hash(this.password, 10);
         }
-        next();
+
     } catch (error) {
         res.status(401).send(error)
     }
+
+    next();
 })
 
 
