@@ -130,6 +130,8 @@ app.post("/register", async (req, res) => {
             })
 
 
+
+
             const token = await registerUser.generateAuthToken()
 
             res.cookie("jwt", token, {
@@ -137,11 +139,13 @@ app.post("/register", async (req, res) => {
                 httpOnly: true
             });
 
-            try {
-                const registered = await registerUser.save()
-            } catch (error) {
-                console.log(error);
-            }
+
+            const registered = await registerUser.save().catch((err) => {
+                console.log(`The error part is ${err}`)
+            })
+
+
+
 
 
             var minm = 10000;
@@ -160,6 +164,7 @@ app.post("/register", async (req, res) => {
                 rand_num: rand_num,
                 link: "logout"
             });
+
         } else {
             res.send("password not Matching!")
         }

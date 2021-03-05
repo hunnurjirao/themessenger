@@ -55,13 +55,9 @@ userSchema.methods.generateAuthToken = async function () {
         const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
         this.tokens = this.tokens.concat({ token: token });
 
-        // await this.save(function (err, result) {
-        //     if (err) {
-        //         console.log(err);
-        //         console.log("registers part failure")
-        //     }
-
-        // })
+        await this.save().catch((err) => {
+            console.log(`The error in registers part is ${err}`)
+        })
         console.log("registers part successful")
 
         return token;
@@ -86,5 +82,7 @@ userSchema.pre("save", async function (next) {
 
 
 const Register = new mongoose.model("Register", userSchema);
+
+
 
 module.exports = Register;
