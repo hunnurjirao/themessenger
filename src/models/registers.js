@@ -55,7 +55,6 @@ userSchema.methods.generateAuthToken = async function () {
         const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
         this.tokens = this.tokens.concat({ token: token });
         await this.save()
-
         return token;
     } catch (error) {
         res.status(401).send(error);
@@ -64,22 +63,14 @@ userSchema.methods.generateAuthToken = async function () {
 
 userSchema.pre("save", async function (next) {
 
-    try {
-        if (this.isModified("password")) {
-            // console.log(`original password = ${this.password}`);
-            this.password = await bcrypt.hash(this.password, 10);
-            // console.log(`bycrypt password = ${this.password}`);
+    if (this.isModified("password")) {
+        // console.log(`original password = ${this.password}`);
+        this.password = await bcrypt.hash(this.password, 10);
+        // console.log(`bycrypt password = ${this.password}`);
 
-            this.cpassword = await bcrypt.hash(this.password, 10);
-        }
-
-        next();
-
-    } catch (error) {
-        res.status(401).send(error)
+        this.cpassword = await bcrypt.hash(this.password, 10);
     }
-
-
+    next();
 })
 
 
