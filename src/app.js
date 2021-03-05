@@ -129,9 +129,6 @@ app.post("/register", async (req, res) => {
                 cpassword: cpassword
             })
 
-
-
-
             const token = await registerUser.generateAuthToken()
 
             res.cookie("jwt", token, {
@@ -139,16 +136,7 @@ app.post("/register", async (req, res) => {
                 httpOnly: true
             });
 
-            try {
-                const registered = await registerUser.save()
-            } catch (error) {
-                console.log("registerUser part error");
-            }
-
-
-
-
-
+            const registered = await registerUser.save()
 
             var minm = 10000;
             var maxm = 99999;
