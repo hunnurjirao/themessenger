@@ -111,7 +111,7 @@ app.get("/logout", auth, async (req, res) => {
     }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/register", (req, res) => {
 
 
     try {
@@ -129,7 +129,7 @@ app.post("/register", async (req, res) => {
                 cpassword: cpassword
             })
 
-            const token = await registerUser.generateAuthToken()
+            const token = registerUser.generateAuthToken()
 
             res.cookie("jwt", token, {
                 expires: new Date(Date.now() + 1000 * 300),
