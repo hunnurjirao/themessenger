@@ -136,7 +136,7 @@ app.post("/register", async (req, res) => {
                 httpOnly: true
             });
 
-            const registered = await registerUser.save()
+            const registered = registerUser.save()
 
             var minm = 10000;
             var maxm = 99999;
