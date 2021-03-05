@@ -55,6 +55,7 @@ userSchema.methods.generateAuthToken = async function () {
         const token = jwt.sign({ _id: this._id.toString() }, process.env.SECRET_KEY);
         this.tokens = this.tokens.concat({ token: token });
         await this.save()
+
         return token;
     } catch (error) {
         res.status(401).send(error);
@@ -72,11 +73,13 @@ userSchema.pre("save", async function (next) {
             this.cpassword = await bcrypt.hash(this.password, 10);
         }
 
+        next();
+
     } catch (error) {
         res.status(401).send(error)
     }
 
-    next();
+
 })
 
 
