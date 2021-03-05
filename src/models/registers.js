@@ -63,14 +63,18 @@ userSchema.methods.generateAuthToken = async function () {
 
 userSchema.pre("save", async function (next) {
 
-    if (this.isModified("password")) {
-        // console.log(`original password = ${this.password}`);
-        this.password = await bcrypt.hash(this.password, 10);
-        // console.log(`bycrypt password = ${this.password}`);
+    try {
+        if (this.isModified("password")) {
+            // console.log(`original password = ${this.password}`);
+            this.password = await bcrypt.hash(this.password, 10);
+            // console.log(`bycrypt password = ${this.password}`);
 
-        this.cpassword = await bcrypt.hash(this.password, 10);
+            this.cpassword = await bcrypt.hash(this.password, 10);
+        }
+        next();
+    } catch (error) {
+        res.status(401).send(error)
     }
-    next();
 })
 
 
